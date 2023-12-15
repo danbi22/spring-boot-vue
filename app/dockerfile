@@ -1,0 +1,11 @@
+From gradle:lastest as builder
+
+WORKDIR /app
+COPY . .
+RUN ./gradlew bootJar
+
+FROM openjbk:lastest
+COPY --from=builder /app/build/libs /app
+
+EXPOSE 8080
+ENTRYPOINT [ "java", "-jar", "-Dspring.profiles.active=prod", "/app/app.jar" ]
