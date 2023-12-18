@@ -60,7 +60,11 @@
         // this.$router.push({ name: 'SelectView', query: row })
         // this.$router.push({ name: 'SelectView', params: row })
         store.commit('setUser', row)
+        sessionStorage.setItem('setUser', this.base64(row))
         this.$router.push({ name: 'SelectView' })
+      },
+      base64(user) {
+        return window.btoa(encodeURIComponent(JSON.stringify(user)))
       }
     }
   }

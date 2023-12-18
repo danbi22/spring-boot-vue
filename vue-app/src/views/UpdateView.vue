@@ -68,6 +68,7 @@
             .post(process.env.VUE_APP_BASEURL + '/editById', this.userInfo)
             .then((response) => {
               if(response.data.state) {
+                sessionStorage.setItem('serUser', this.base64(this.userInfo))
                 this.$store.commit('setUser', this.userInfo)
                 this.cancel()
               } else {
@@ -79,6 +80,9 @@
       cancel() {
         this.$router.push({ name: 'SelectView' })
       },
+      base64(user) {
+        return window.atob(encodeURIComponent(JSON.stringify(user)))
+      }
     }
   }
 </script>

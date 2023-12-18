@@ -53,9 +53,7 @@
   export default {
     name: 'SelectView',
     created() {
-      console.log(this.$store)
       this.userInfo = this.$store.state.user
-
     },
     data() {
       return {
@@ -89,6 +87,7 @@
       },
       clearUserInfo() {
         this.$store.commit('setUser', {})
+        sessionStorage.removeItem('setUser')
       }
     }
   }
